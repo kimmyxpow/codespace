@@ -54,6 +54,11 @@ class SpaceController extends Controller
         return to_route('space.index')->with('status', 'Space created!');
     }
 
+    public function browse()
+    {
+        return view('pages.space.browse');
+    }
+
     /**
      * Display the specified resource.
      *

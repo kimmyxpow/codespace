@@ -7,7 +7,7 @@
             <div id="view-space">
                 <a href="{{ route('space.index') }}" class="btn btn-secondary"><i class="fas fa-list"></i></a>
                 |
-                <a href="#" class="btn btn-secondary"><i class="fas fa-globe"></i></a>
+                <a href="{{ route('space.browse') }}" class="btn btn-secondary"><i class="fas fa-globe"></i></a>
             </div>
         </div>
     </div>

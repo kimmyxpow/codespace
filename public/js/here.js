@@ -114,6 +114,56 @@ if (navigator.geolocation) {
         if (window.action == "submit") {
             addDragableMarker(map, behavior);
         }
+
+        // Browse location codespace
+        let spaces = [];
+        const fetchSpaces = function (latitude, longitude, radius) {
+            return new Promise(function (resolve, reject) {
+                resolve(
+                    fetch(
+                        `/api/spaces?lat=${latitude}&lng=${longitude}&rad=${radius}`
+                    )
+                        .then((res) => res.json())
+                        .then(function (data) {
+                            data.forEach(function (value, index) {
+                                let marker = new H.map.Marker({
+                                    lat: value.latitude,
+                                    lng: value.longitude,
+                                });
+                                spaces.push(marker);
+                            });
+                        })
+                );
+            });
+        };
+
+        function clearSpace() {
+            map.removeObjects(spaces);
+            spaces = [];
+        }
+
+        function init(latitude, longitude, radius) {
+            clearSpace();
+            fetchSpaces(latitude, longitude, radius).then(function () {
+                map.addObjects(spaces);
+            });
+        }
+
+        if (window.action == "browse") {
+            map.addEventListener(
+                "dragend",
+                function (ev) {
+                    let resultCoord = map.screenToGeo(
+                        ev.currentPointer.viewportX,
+                        ev.currentPointer.viewportY
+                    );
+                    init(resultCoord.lat, resultCoord.lng, 40);
+                },
+                false
+            );
+
+            init(objLocalCoord.lat, objLocalCoord.lng, 40);
+        }
     });
 } else {
     console.error("Geolocation is not supported");
