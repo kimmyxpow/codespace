@@ -49,7 +49,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="latitude" class="form-label">Latitude</label>
-                        {!! Form::text('latitude', null, ['class' => $errors->has('latitude') ? 'form-control is-invalid' : 'form-control']) !!}
+                        {!! Form::text('latitude', null, ['class' => $errors->has('latitude') ? 'form-control is-invalid' : 'form-control', 'id' => 'lat']) !!}
                         @error('latitude')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="longitude" class="form-label">Longitude</label>
-                        {!! Form::text('longitude', null, ['class' => $errors->has('longitude') ? 'form-control is-invalid' : 'form-control']) !!}
+                        {!! Form::text('longitude', null, ['class' => $errors->has('longitude') ? 'form-control is-invalid' : 'form-control', 'id' => 'lng']) !!}
                         @error('longitude')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -73,3 +73,9 @@
     </div>
 </div>
 @endsection
+
+@push('script')
+    <script>
+        window.action = "submit";
+    </script>
+@endpush
