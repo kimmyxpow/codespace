@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Space;
 
 class SpaceController extends Controller
 {
@@ -18,7 +19,8 @@ class SpaceController extends Controller
      */
     public function index()
     {
-        return view('pages.space.index');
+        $spaces = Space::latest()->paginate(4);
+        return view('pages.space.index', compact('spaces'));
     }
 
     /**
