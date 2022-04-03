@@ -1,7 +1,7 @@
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
         let localCoord = position.coords;
-        let objLocalCoord = {
+        objLocalCoord = {
             lat: localCoord.latitude,
             lng: localCoord.longitude,
         };
@@ -165,6 +165,14 @@ if (navigator.geolocation) {
             init(objLocalCoord.lat, objLocalCoord.lng, 40);
         }
     });
+
+    // Open url direction
+    function openDirection(lat, lng, id) {
+        window.open(
+            `/space/${id}?from=${objLocalCoord.lat},${objLocalCoord.lng}&to=${lat},${lng}`,
+            "_self"
+        );
+    }
 } else {
     console.error("Geolocation is not supported");
 }
