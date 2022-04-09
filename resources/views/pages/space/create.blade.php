@@ -68,16 +68,22 @@
                         <div class="increment">
                             <label for="photo">Photo</label>
                             <div class="input-group mb-2">
-                                <input type="file" class="form-control" name="photo[]" id="photo">
-                                <button class="btn btn-outline-secondary btn-add" type="button">
+                                <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo[]"
+                                    id="photo">
+                                <button class="btn btn-outline-success btn-add" type="button">
                                     <i class="fas fa-plus-square"></i>
                                 </button>
+                                @error('photo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="clone invisible position-absolute">
                             <div class="input-group mb-2">
                                 <input type="file" class="form-control" name="photo[]" id="photo">
-                                <button class="btn btn-outline-secondary btn-remove" type="button">
+                                <button class="btn btn-outline-danger btn-remove" type="button">
                                     <i class="fas fa-minus-square"></i>
                                 </button>
                             </div>
